@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 我的音乐数据仪表盘</title>
+    
+    <!-- 
+        【知识点1】CDN引入第三方库
+        ECharts是百度开源的数据可视化库，类似Excel图表但交互性更强
+        通过CDN引入不需要下载任何文件，浏览器会自动从网络加载
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <!-- 
+        【知识点2】外部样式表引入
+        rel="stylesheet" 告诉浏览器这是样式文件
+        href 指向css文件路径，浏览器会并行加载它
+    -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 
+        【知识点3】语义化标签
+        header/main/footer 是HTML5语义化标签，比div更有可读性
+        对SEO和屏幕阅读器友好，也是现代前端开发规范
+    -->
+    <header class="glass-header">
+        <h1>🎧 我的音乐宇宙</h1>
+        <p>用数据可视化，看见音乐在生命中的痕迹</p>
+    </header>
+
+    <main class="dashboard">
+        <!-- 
+            【知识点4】KPI卡片设计
+            数据仪表盘的第一眼通常是"关键指标"（Key Performance Indicator）
+            用4张卡片展示最核心数据，给用户最直接的视觉冲击
+        -->
+        <section class="kpi-cards">
+            <div class="kpi-card glass">
+                <div class="kpi-icon">🎶</div>
+                <div class="kpi-value" id="total-songs">0</div>
+                <div class="kpi-label">累计听歌</div>
+            </div>
+            <div class="kpi-card glass">
+                <div class="kpi-icon">⏱️</div>
+                <div class="kpi-value" id="total-hours">0</div>
+                <div class="kpi-label">听歌时长(小时)</div>
+            </div>
+            <div class="kpi-card glass">
+                <div class="kpi-icon">🎤</div>
+                <div class="kpi-value" id="top-artist">-</div>
+                <div class="kpi-label">最爱心艺人</div>
+            </div>
+            <div class="kpi-card glass">
+                <div class="kpi-icon">🎸</div>
+                <div class="kpi-value" id="top-genre">-</div>
+                <div class="kpi-label">最爱风格</div>
+            </div>
+        </section>
+
+        <!-- 
+            【知识点5】CSS Grid 网格布局
+            下面用class="chart-grid"实现响应式网格
+            大屏显示2列，小屏自动变成1列
+            每个.chart-card就是一个图表容器
+        -->
+        <section class="chart-grid">
+            <!-- 图表1: 听歌时段分布 -->
+            <div class="chart-card glass">
+                <h3>⏰ 一天中什么时候最爱听歌？</h3>
+                <!-- 
+                    【知识点6】ECharts容器
+                    ECharts需要一个有明确宽高的div作为画布
+                    通过id让JS找到它，然后往里面画图
+                -->
+                <div id="chart-hours" class="chart-container"></div>
+            </div>
+
+            <!-- 图表2: 歌手TOP10 -->
+            <div class="chart-card glass">
+                <h3>🌟 我的歌手TOP10</h3>
+                <div id="chart-artists" class="chart-container"></div>
+            </div>
+
+            <!-- 图表3: 音乐流派分布 -->
+            <div class="chart-card glass">
+                <h3>🎨 音乐口味构成</h3>
+                <div id="chart-genres" class="chart-container"></div>
+            </div>
+
+            <!-- 图表4: 月度听歌趋势 -->
+            <div class="chart-card glass">
+                <h3>📈 2025年听歌趋势</h3>
+                <div id="chart-monthly" class="chart-container"></div>
+            </div>
+
+            <!-- 图表5: 音乐特征雷达图 -->
+            <div class="chart-card glass">
+                <h3>🎯 我的音乐偏好画像</h3>
+                <div id="chart-radar" class="chart-container"></div>
+            </div>
+
+            <!-- 图表6: 每周听歌热力图 -->
+            <div class="chart-card glass">
+                <h3>🔥 听歌活跃度热力图</h3>
+                <div id="chart-heatmap" class="chart-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <p>Made with 💜 by Vibe Coding | 数据仅供演示</p>
+    </footer>
+
+    <!-- 
+        【知识点7】JS文件放在body末尾
+        原因：浏览器按顺序加载，先让HTML和CSS渲染出来
+        用户不会对着白屏等JS加载，体验更好
+    -->
+    <script src="js/app.js"></script>
+</body>
+</html>
